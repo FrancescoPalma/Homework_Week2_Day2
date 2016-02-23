@@ -53,15 +53,22 @@ class TestGame < Minitest::Test
     assert_equal(0,@player1.position)
   end
 
+  # This test expects nil as result from passing the actual instance variable of game.
+  # @winner will then be present in the initialize method in game.rb, line 10 with nil assigned as value.
+  # I think the goal of this test is to set the winner to nil. Therefore, to 'nothing'.
+  # In fact, when players start the game there isn't any winner yet.
   def winner_starts_as_nil
     assert_equal(nil,@game.winner)
   end
 
+  # This test expects the game to be won if a player moves 8 spaces from its current position.
   def test_game_is_won
     @game.next_turn(8)
     assert_equal(true,@game.is_won?)
   end
 
+  # This test shows that once player1 has moved 8 spaces the game is won so there is no 'next_turn'
+  # for both players. In fact, in the second 'assert_equal' player2 is expected to return 0 as next move.
   def test_no_next_turn_on_win
     @game.next_turn(8)
     assert_equal(true,@game.is_won?)
@@ -70,6 +77,8 @@ class TestGame < Minitest::Test
     assert_equal(0,@player2.position)
   end
 
+  # This test shows every time a player makes a move the log will store the 'size' of the move, 
+  # the name of the player, the result from the roll and the new position.
   def test_adds_turn_to_log
     @game.next_turn(1)
     assert_equal(1,@game.log.size)

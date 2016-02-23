@@ -21,6 +21,8 @@ class TestPlayer < Minitest::Test
     assert_equal(5, @player.position)
   end
 
+  # This test expects 8 as a result for it is the maximum size set of spaces in the board.
+  # In fact, if the '@player.move' is 15 then its new actual move would be 8.
   def test_player_cannot_move_past_maximum
     @player.move(15)
     assert_equal(8, @player.position)
